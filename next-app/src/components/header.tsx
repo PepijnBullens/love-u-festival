@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { languages } from "@/app/i18n/settings";
+import VisualModeSwitcher from "@/components/theme-switcher/theme-switcher";
 
 export default async function ({
   params,
@@ -11,7 +12,7 @@ export default async function ({
   const { lng } = await params;
 
   return (
-    <footer>
+    <header>
       {languages
         .filter((l) => lng !== l)
         .map((l, index) => {
@@ -22,6 +23,7 @@ export default async function ({
             </span>
           );
         })}
-    </footer>
+      <VisualModeSwitcher />
+    </header>
   );
 }
