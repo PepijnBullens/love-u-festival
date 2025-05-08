@@ -1,11 +1,11 @@
 "use client";
 
 type Language = keyof typeof flags;
+
 import { languages, flags } from "@/app/i18n/settings";
-import Link from "next/link";
 import Icon from "@/component/icon";
 import { useOverlay } from "@/context/overlay-context";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function LanguageSwitcher({
   currentPage,
@@ -14,11 +14,13 @@ export default function LanguageSwitcher({
   currentPage: string;
   lng: string;
 }) {
+  const router = useRouter();
+
   const { showOverlay, hideOverlay } = useOverlay();
 
   const handleSwitch = (language: string) => {
     hideOverlay();
-    setTimeout(() => redirect(`/${language}/${currentPage}`), 1000);
+    setTimeout(() => router.push(`/${language}/${currentPage}`), 1000);
   };
 
   return (

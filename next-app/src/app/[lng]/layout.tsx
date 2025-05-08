@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import "./globals.css";
+import MainLayout from "@/layout/main-layout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +28,9 @@ export default async function RootLayout({
     <html lang={lng} dir={dir(lng)}>
       <body>
         <ThemeProvider>
-          <OverlayProvider>{children}</OverlayProvider>
+          <OverlayProvider>
+            <MainLayout params={params}>{children}</MainLayout>
+          </OverlayProvider>
         </ThemeProvider>
       </body>
     </html>
