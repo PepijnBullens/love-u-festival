@@ -2,7 +2,7 @@
 
 import { useTheme } from "@/context/theme-context";
 
-export default function Interface() {
+export default function ThemeSwitcher() {
   const { theme, toggleTheme } = useTheme();
 
   return (

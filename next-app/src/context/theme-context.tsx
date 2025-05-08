@@ -21,11 +21,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const root = document.documentElement;
+    const root = document.querySelector("html");
     if (theme === "dark") {
-      root.classList.add("dark");
+      root?.classList.add("dark");
     } else {
-      root.classList.remove("dark");
+      root?.classList.remove("dark");
     }
     document.cookie = `theme=${theme}; path=/`;
   }, [theme]);

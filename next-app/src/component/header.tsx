@@ -1,35 +1,40 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { languages } from "@/app/i18n/settings";
-import VisualModeSwitcher from "@/component/theme-switcher/theme-switcher";
+import VisualModeSwitcher from "@/component/switchers/theme-switcher";
 import Logo from "@/component/logo";
+import LanguageSwitcher from "./switchers/language-switcher";
 
 export default function Header({
-  params,
   currentPage,
+  params,
 }: {
-  params: { lng: string };
   currentPage: string;
+  params: { lng: string };
 }) {
-  const { lng } = params;
+  const [lng, setLng] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchLanguage() {
+      const { lng } = await params;
+      setLng(lng);
+    }
+    fetchLanguage();
+  }, []);
 
   return (
-    <nav>
-      <div>
+    <nav className="w-full p-4 flex justify-between items-center">
+      <Link
+        href={`/${lng}/information`}
+        className="w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] shadow-icon cursor-pointer"
+      >
         <Logo />
+      </Link>
+      <div className="flex gap-2">
+        <LanguageSwitcher currentPage={currentPage} lng={lng} />
+        <VisualModeSwitcher />
       </div>
-      {languages
-        .filter((l) => lng !== l)
-        .map((l, index) => {
-          return (
-            <span key={l}>
-              {index > 0 && " or "}
-              <Link href={`/${l}/${currentPage}`}>{l}</Link>
-            </span>
-          );
-        })}
-      <VisualModeSwitcher />
     </nav>
   );
 }
