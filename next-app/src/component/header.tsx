@@ -27,7 +27,7 @@ export default function Header({
     <nav className="w-full p-4 flex justify-between items-center">
       <Link
         href={`/${lng}/information`}
-        className="w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] shadow-icon cursor-pointer"
+        className="z-200 w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] shadow-icon cursor-pointer"
       >
         <Logo />
       </Link>
