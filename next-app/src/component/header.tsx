@@ -1,18 +1,24 @@
+"use client";
+
 import Link from "next/link";
 import { languages } from "@/app/i18n/settings";
-import VisualModeSwitcher from "@/components/theme-switcher/theme-switcher";
+import VisualModeSwitcher from "@/component/theme-switcher/theme-switcher";
+import Logo from "@/component/logo";
 
-export default async function ({
+export default function Header({
   params,
   currentPage,
 }: {
   params: { lng: string };
   currentPage: string;
 }) {
-  const { lng } = await params;
+  const { lng } = params;
 
   return (
-    <header>
+    <nav>
+      <div>
+        <Logo />
+      </div>
       {languages
         .filter((l) => lng !== l)
         .map((l, index) => {
@@ -24,6 +30,6 @@ export default async function ({
           );
         })}
       <VisualModeSwitcher />
-    </header>
+    </nav>
   );
 }

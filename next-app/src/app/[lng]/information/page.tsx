@@ -1,5 +1,5 @@
-import Information from "@/components/pages/information";
-import Header from "@/components/header";
+import Information from "@/component/pages/information";
+import Header from "@/component/header";
 
 export default function InformationPage({
   params,

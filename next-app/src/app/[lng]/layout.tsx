@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/context/theme-context";
 import type { Metadata } from "next";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
@@ -23,7 +24,9 @@ export default async function RootLayout({
 
   return (
     <html lang={lng} dir={dir(lng)}>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
