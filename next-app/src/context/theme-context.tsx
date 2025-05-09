@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 type ThemeContextType = {
   theme: string;
@@ -10,15 +11,13 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState("light");
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  useEffect(() => {
-    const storedTheme = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("theme="))
-      ?.split("=")[1];
-    setTheme(storedTheme || "light");
-  }, []);
+  const [theme, setTheme] = useState(() => {
+    const urlTheme = searchParams.get("theme");
+    return urlTheme === "dark" ? "dark" : "light";
+  });
 
   useEffect(() => {
     const root = document.documentElement;
@@ -27,8 +26,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove("dark");
     }
-    document.cookie = `theme=${theme};`;
-  }, [theme]);
+
+    const params = new URLSearchParams(searchParams);
+    params.set("theme", theme);
+    router.replace(`?${params.toString()}`);
+  }, [theme, searchParams, router]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));

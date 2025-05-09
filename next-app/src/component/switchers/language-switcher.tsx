@@ -5,7 +5,7 @@ type Language = keyof typeof flags;
 import { languages, flags } from "@/app/i18n/settings";
 import Icon from "@/component/icon";
 import { useOverlay } from "@/context/overlay-context";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LanguageSwitcher({
   currentPage,
@@ -15,12 +15,17 @@ export default function LanguageSwitcher({
   lng: string;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const { showOverlay, hideOverlay } = useOverlay();
 
   const handleSwitch = (language: string) => {
     hideOverlay();
-    setTimeout(() => router.push(`/${language}/${currentPage}`), 1000);
+
+    const currentTheme = searchParams.get("theme") || "light";
+    setTimeout(() => {
+      router.push(`/${language}/${currentPage}?theme=${currentTheme}`);
+    }, 1000);
   };
 
   return (
