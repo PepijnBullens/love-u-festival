@@ -1,4 +1,43 @@
 {
-  "title": "Hi there!",
-  "to-map-page": "To map page"
+  "main-title": "An addition to the UIT, for (new) students in the Utrecht region",
+
+  "location-title": "Grasweide Strijkviertel",
+  "location-content": "Strijkviertelweg, Utrecht",
+
+  "date-title": "Date & Opening Hours",
+  "date-content": "6 September 2025 - 12:00 until 23:00",
+
+  "accessibility-title": "Accessibility",
+
+  "bicycle-title": "Bicycle",
+  "bicycle-content": "There is a large free bicycle shed where you can store your bicycle all day.",
+
+  "car-title": "Car",
+  "car-content": "You can purchase a parking ticket. Parking is available at P+R Papendorp, follow the signs 'P online ticket'. Didn't you buy a ticket in advance? Then you can purchase a parking ticket from the parking attendant on location (PIN ONLY). Please note: FULL=FULL",
+
+  "public-transportation-title": "Public Transportation",
+  "public-transportation-content": "Are you coming to Lief by public transport? Then plan your trip via 9292.nl.",
+
+  "shuttlebus-title": "Shuttlebus",
+  "shuttlebus-content": "From Utrecht Centraal you can take our free shuttle bus to the festival site. You will find this bus at the central station on Mineurslaan. Follow the white signs with black arrows and '❤️U Festival'. The bus runs between 12:00 PM & 7:00 PM towards the festival and from 9:00 PM you can get on again to go to the station.",
+
+  "taxi-title": "Taxi",
+  "taxi-content": "Navigate to Strijkviertel, De Meern (Utrecht). Follow the signs \"Kiss & Ride ❤️U Festival\" once you are near the festival site.",
+
+  "lockers-title": "Lockers",
+  "lockers-content": "There are lockers on the festival site where you can safely store your belongings! This fits 3 to 4 coats. Good to know: you can open and close your locker as often as you want throughout the day. It is not possible to reserve a locker online.",
+
+  "faq-title": "FAQ",
+
+  "medication-title": "I take medication. What now?",
+  "medication-content": "You are allowed to take medication with you in a maximum dose that you need in 1 day. A doctor's note/medication passport is required. Security will review your documentation and check the medications. It is possible that the first aid will keep your medications (for example if they are dangerous in combination with alcohol) and you can only take them at the first aid.",
+
+  "leave-festival-grounds-title": "Can I leave the festival grounds during the event?",
+  "leave-festival-grounds-content": "No, unfortunately that is not possible. In order to guarantee the safety of all visitors, we cannot allow the festival site to be left in between. We have no insight into what a visitor does outside the festival site and in what state they enter the site again. Therefore, no exceptions can be made for this. We have enough lounge areas, food stands & bars to last a whole day.",
+
+  "are-there-lockers-title": "Are there lockers?",
+  "are-there-lockers-content": "Yes, these are available! On site you can rent medium & large lockers.",
+
+  "golden-glu-title": "Golden-GLU",
+  "golden-glu-content": "Students of the GLU have special privileges during the festival and can be recognized by a gold bracelet. With this gold bracelet they can use the gold toilets and gold marked order points at the bars during the festival without having to stand in a queue."
 }

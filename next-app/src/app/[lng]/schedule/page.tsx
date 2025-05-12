@@ -1,5 +1,5 @@
-import Map from "@/component/pages/map";
+import Schedule from "@/component/pages/schedule";
 
 export default function SchedulePage({ params }: { params: { lng: string } }) {
-  return <Map params={params} />;
+  return <Schedule params={params} />;
 }
