@@ -16,7 +16,17 @@ export default function MainLayout({
   const { theme } = useTheme();
 
   return (
-    <main className="flex flex-col h-full">
+    <main
+      className={`
+      ${
+        pathname === "information"
+          ? "blue-gradient"
+          : pathname === "schedule"
+          ? "red-gradient"
+          : ""
+      }
+    flex flex-col h-full`}
+    >
       <Header params={params} currentPage={pathname} />
       <section className="flex flex-col grow">{children}</section>
       <Footer params={params} theme={theme} currentPage={pathname} />
