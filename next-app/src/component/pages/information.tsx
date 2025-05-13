@@ -47,16 +47,11 @@ export default async function Information({
             key={`${item.title}-${index}`}
             title={t(item.title)}
             content={
-              item.content &&
-              typeof item.content === "object" &&
-              "title" in item.content &&
-              "content" in item.content
-                ? [
-                    {
-                      title: item.content.title as string,
-                      content: item.content.content as string,
-                    },
-                  ]
+              Array.isArray(item.content)
+                ? item.content.map((contentItem) => ({
+                    title: t(contentItem.title),
+                    content: t(contentItem.content),
+                  }))
                 : []
             }
           />
