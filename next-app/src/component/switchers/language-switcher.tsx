@@ -55,7 +55,13 @@ export default function LanguageSwitcher({
       }
       className="w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] shadow-icon cursor-pointer"
     >
-      <Icon name="translate" width={24} height={24} />
+      <Icon
+        name="translate"
+        width={24}
+        height={24}
+        themeMode={false}
+        reversed={false}
+      />
     </div>
   );
 }

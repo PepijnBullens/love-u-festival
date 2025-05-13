@@ -27,7 +27,13 @@ export default function ThemeSwitcher() {
         }}
         className="absolute left-1/2 top-1/2 -translate-1/2"
       >
-        <Icon name="light-mode" width={24} height={24} />
+        <Icon
+          name="light-mode"
+          width={24}
+          height={24}
+          themeMode={false}
+          reversed={false}
+        />
       </motion.div>
 
       <motion.div
@@ -43,7 +49,13 @@ export default function ThemeSwitcher() {
         }}
         className="absolute left-1/2 top-1/2 -translate-1/2"
       >
-        <Icon name="dark-mode" width={24} height={24} />
+        <Icon
+          name="dark-mode"
+          width={24}
+          height={24}
+          themeMode={false}
+          reversed={false}
+        />
       </motion.div>
     </div>
   );

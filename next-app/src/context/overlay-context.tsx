@@ -94,7 +94,13 @@ export function OverlayProvider({ children }: { children: ReactNode }) {
               onClick={hideOverlay}
               className="absolute top-4 right-4 z-100 w-[3rem] aspect-square rounded-xl flex justify-center items-center cursor-pointer bg-[#F03228]"
             >
-              <Icon name="close-white" width={32} height={32} />
+              <Icon
+                name="close-white"
+                width={32}
+                height={32}
+                themeMode={false}
+                reversed={false}
+              />
             </motion.div>
           </>
         )}

@@ -29,7 +29,7 @@ export default function Header({
         href={`/${lng}/information`}
         className="z-200 w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] shadow-icon cursor-pointer"
       >
-        <Logo />
+        <Logo width={24} height={24} />
       </Link>
       <div className="flex gap-2">
         <LanguageSwitcher currentPage={currentPage} lng={lng} />

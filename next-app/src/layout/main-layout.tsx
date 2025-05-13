@@ -28,7 +28,9 @@ export default function MainLayout({
     flex flex-col h-full`}
     >
       <Header params={params} currentPage={pathname} />
-      <section className="flex flex-col grow">{children}</section>
+      <section className="flex flex-col h-[80svh] overflow-auto">
+        {children}
+      </section>
       <Footer params={params} theme={theme} currentPage={pathname} />
     </main>
   );

@@ -32,3 +32,37 @@ body {
 .red-gradient {
   background: linear-gradient(-170.806deg, #ffffff 0%, #ffd8d6 81%);
 }
+
+.shadow-information-block {
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 20%);
+}
+
+@font-face {
+  font-family: "sansation";
+  src: url("/fonts/Sansation-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "sansation-bold";
+  src: url("/fonts/Sansation-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "sansation-light-italic";
+  src: url("/fonts/Sansation-LightItalic.ttf");
+  font-weight: 300;
+}
+
+.sansation {
+  font-family: "sansation";
+}
+
+.sansation-bold {
+  font-family: "sansation-bold";
+}
+
+.sansation-light-italic {
+  font-family: "sansation-light-italic";
+}

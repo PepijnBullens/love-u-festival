@@ -39,15 +39,11 @@ export default function Footer({
       {items.map((item) => (
         <Link key={item} href={`/${lng}/${item}`} className="z-50">
           <Icon
-            name={`${item}-${
-              currentPage === item
-                ? theme === "light"
-                  ? "dark"
-                  : theme
-                : theme
-            }`}
+            name={item}
             width={46}
             height={46}
+            themeMode={true}
+            reversed={currentPage === item}
           />
         </Link>
       ))}

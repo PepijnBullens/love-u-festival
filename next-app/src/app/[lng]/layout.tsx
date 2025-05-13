@@ -26,7 +26,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lng} dir={dir(lng)} className="h-[100svh]">
-      <body className="h-full flex flex-col">
+      <body className="h-full flex flex-col sansation">
         <ThemeProvider>
           <OverlayProvider>
             <MainLayout params={params}>{children}</MainLayout>
