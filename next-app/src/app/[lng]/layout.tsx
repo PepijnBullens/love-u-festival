@@ -25,8 +25,8 @@ export default async function RootLayout({
   const { lng } = await params;
 
   return (
-    <html lang={lng} dir={dir(lng)} className="h-[100svh]">
-      <body className="h-full flex flex-col sansation">
+    <html lang={lng} dir={dir(lng)} className="h-[100svh] overflow-hidden">
+      <body className="h-full flex flex-col sansation overflow-hidden">
         <ThemeProvider>
           <OverlayProvider>
             <MainLayout params={params}>{children}</MainLayout>

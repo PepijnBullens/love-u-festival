@@ -29,10 +29,10 @@ export default function Footer({
     <footer className="relative w-full flex justify-center items-center p-8 gap-8 bg-[#FFFFFF]">
       <motion.div
         initial={{
-          x: `${currentPosition * (54 + 24)}px`,
+          x: `${currentPosition * (48 + 24)}px`,
         }}
         animate={{
-          x: `${currentPosition * (54 + 24)}px`,
+          x: `${currentPosition * (48 + 24)}px`,
         }}
         className="w-[54px] z-10 left-1/2 top-1/2 rounded-xl -translate-1/2 aspect-square bg-[#000000] absolute"
       ></motion.div>
@@ -40,8 +40,8 @@ export default function Footer({
         <Link key={item} href={`/${lng}/${item}`} className="z-50">
           <Icon
             name={item}
-            width={46}
-            height={46}
+            width={40}
+            height={40}
             themeMode={true}
             reversed={currentPage === item}
           />
