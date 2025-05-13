@@ -10,9 +10,10 @@ export default function ThemeSwitcher() {
   return (
     <div
       onClick={toggleTheme}
-      className={`${
-        theme === "light" ? "bg-[#000000]" : "bg-[#FFFFFF]"
-      } w-[3rem] relative aspect-square rounded-xl shadow-icon cursor-pointer overflow-hidden transition-colors`}
+      style={{
+        backgroundColor: theme === "light" ? "#000000" : "#FFFFFF",
+      }}
+      className="w-[3rem] relative aspect-square rounded-xl shadow-icon cursor-pointer overflow-hidden transition-colors"
     >
       <motion.div
         initial={{
