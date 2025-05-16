@@ -1,4 +1,5 @@
 import { hangar } from "@/app/[lng]/schedule/schedule";
+import { poton } from "@/app/[lng]/schedule/schedule";
 
 interface Act {
   start: string;
@@ -10,7 +11,7 @@ interface Lineup {
   saturday?: Act[];
 }
 
-interface Hangar {
+interface Stage {
   lineup?: Lineup;
 }
 
@@ -20,7 +21,11 @@ export default function getNextActs(
   let acts;
 
   if (stage === "Hangar" && hangar) {
-    acts = (hangar as Hangar)?.lineup?.saturday;
+    acts = (hangar as Stage)?.lineup?.saturday;
+  }
+
+  if (stage === "Poton" && poton) {
+    acts = (poton as Stage)?.lineup?.saturday;
   }
 
   if (acts) {
