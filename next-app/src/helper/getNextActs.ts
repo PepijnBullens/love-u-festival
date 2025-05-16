@@ -1,10 +1,14 @@
 import { hangar } from "@/app/[lng]/schedule/schedule";
 import { poton } from "@/app/[lng]/schedule/schedule";
+import { theLake } from "@/app/[lng]/schedule/schedule";
+import { theClub } from "@/app/[lng]/schedule/schedule";
 
 interface Act {
   start: string;
   end: string;
   label: string;
+  image: string | null;
+  info: string | null;
 }
 
 interface Lineup {
@@ -15,7 +19,7 @@ interface Stage {
   lineup?: Lineup;
 }
 
-export default function getNextActs(
+export default function getNextAct(
   stage: "Poton" | "The Lake" | "The Club" | "Hangar"
 ) {
   let acts;
@@ -26,6 +30,14 @@ export default function getNextActs(
 
   if (stage === "Poton" && poton) {
     acts = (poton as Stage)?.lineup?.saturday;
+  }
+
+  if (stage === "The Lake" && theLake) {
+    acts = (theLake as Stage)?.lineup?.saturday;
+  }
+
+  if (stage === "The Club" && theClub) {
+    acts = (theClub as Stage)?.lineup?.saturday;
   }
 
   if (acts) {
@@ -39,9 +51,9 @@ export default function getNextActs(
       })
       .filter(({ date }) => date > now)
       .sort((a, b) => a.date.getTime() - b.date.getTime())
-      .slice(0, 3)
+      .slice(0, 1)
       .map(({ act }) => act);
 
-    return nextActs.length > 0 ? nextActs : [];
+    return nextActs.length > 0 ? nextActs[0] : null;
   }
 }

@@ -17,12 +17,14 @@ interface Act {
   start: string;
   end: string;
   label: string;
+  image: string | null;
+  info: string | null;
 }
 
 export default function Map({ params }: { params: { lng: string } }) {
   const [overlay, setOverlay] = useState<null | {
     stage: string;
-    acts: Act[];
+    act: Act;
   }>(null);
   const [t, setT] = useState<any>(() => (key: string) => key);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });

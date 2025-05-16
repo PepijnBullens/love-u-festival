@@ -1,10 +1,12 @@
-import getNextActs from "@/helper/getNextActs";
+import getNextAct from "@/helper/getNextActs";
 import Image from "next/image";
 
 interface Act {
   start: string;
   end: string;
   label: string;
+  image: string | null;
+  info: string | null;
 }
 
 export default function Pin({
@@ -19,7 +21,7 @@ export default function Pin({
   setOverlay: (
     data: null | {
       stage: string;
-      acts: Act[];
+      act: Act;
     }
   ) => void;
 }) {
@@ -28,12 +30,12 @@ export default function Pin({
   ) => {
     if (!stage) return;
 
-    const nextActs = getNextActs(stage);
-    if (!nextActs) return;
+    const nextAct = getNextAct(stage);
+    if (!nextAct) return;
 
     setOverlay({
       stage,
-      acts: nextActs,
+      act: nextAct,
     });
   };
 
