@@ -9,6 +9,9 @@ import {
 import Pin from "@/component/pin";
 import { pins } from "@/app/[lng]/map/pins";
 import PinOverlay from "../pin-overlay";
+import { AnimatePresence } from "framer-motion";
+import { useTranslation } from "@/app/i18n";
+import Image from "next/image";
 
 interface Act {
   start: string;
@@ -17,70 +20,77 @@ interface Act {
 }
 
 export default function Map({ params }: { params: { lng: string } }) {
-  const [lng, setLng] = useState<string>("");
-  const [overlay, setOverlay] = useState<null | Act>(null);
+  const [overlay, setOverlay] = useState<null | {
+    stage: string;
+    acts: Act[];
+  }>(null);
+  const [t, setT] = useState<any>(() => (key: string) => key);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    async function fetchLng() {
+    async function fetchLngAndTranslation() {
       const { lng } = await params;
-      setLng(lng);
+      const { t } = await useTranslation(lng, "map");
+      setT(() => t);
     }
-    fetchLng();
-  }, [lng]);
+    fetchLngAndTranslation();
+  }, [params]);
+
+  useEffect(() => {
+    function updateDimensions() {
+      setDimensions({ width: window.innerWidth, height: window.innerHeight });
+    }
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, [params]);
 
   return (
     <>
-      {overlay && <PinOverlay overlay={overlay} />}
-      <TransformWrapper
-        initialScale={2}
-        minScale={1}
-        maxScale={4}
-        centerOnInit={true}
-        limitToBounds={true}
-        alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
-        centerZoomedOut={true}
-      >
+      <AnimatePresence>
+        {overlay && (
+          <PinOverlay overlay={overlay} setOverlay={setOverlay} t={t} />
+        )}
+      </AnimatePresence>
+
+      <TransformWrapper centerZoomedOut={true}>
         <TransformComponent>
           <div className="p-4">
-            <img src="/map.png" alt="Map" className="z-10" />
-          </div>
-          {pins.map(
-            (
-              pin: {
-                x: number;
-                y: number;
-                content: {
+            <Image
+              src="/map.png"
+              alt="Map"
+              width={dimensions.width}
+              height={dimensions.height}
+            />
+            {pins.map(
+              (
+                pin: {
+                  x: number;
+                  y: number;
                   stage: "Poton" | "The Lake" | "The Club" | "Hangar" | null;
-                  icon: string | null;
-                };
-              },
-              index
-            ) => (
-              <div
-                key={`${pin.x}-${pin.y}-${index}`}
-                style={{
-                  position: "absolute",
-                  left: `${pin.x}px`,
-                  top: `${pin.y}px`,
-                }}
-              >
-                <KeepScale>
+                  size: number;
+                  image: string;
+                },
+                index
+              ) => (
+                <KeepScale
+                  key={`${pin.x}-${pin.y}-${index}`}
+                  style={{
+                    position: "absolute",
+                    left: `${pin.x}px`,
+                    top: `${pin.y}px`,
+                  }}
+                >
                   <Pin
-                    content={
-                      pin.content.stage
-                        ? pin.content.stage
-                        : pin.content.icon
-                        ? pin.content.icon
-                        : ""
-                    }
-                    stage={pin.content.stage}
-                    size={32}
+                    image={pin.image}
+                    stage={pin.stage}
+                    size={pin.size}
                     setOverlay={setOverlay}
                   />
                 </KeepScale>
-              </div>
-            )
-          )}
+              )
+            )}
+          </div>
         </TransformComponent>
       </TransformWrapper>
     </>

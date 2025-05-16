@@ -1,4 +1,5 @@
-import getNextAct from "@/helper/getNextAct";
+import getNextActs from "@/helper/getNextActs";
+import Image from "next/image";
 
 interface Act {
   start: string;
@@ -8,18 +9,17 @@ interface Act {
 
 export default function Pin({
   size,
-  content,
+  image,
   stage,
   setOverlay,
 }: {
   size: number;
-  content: React.ReactNode;
+  image: string;
   stage: "Poton" | "The Lake" | "The Club" | "Hangar" | null;
   setOverlay: (
     data: null | {
-      start: string;
-      end: string;
-      label: string;
+      stage: string;
+      acts: Act[];
     }
   ) => void;
 }) {
@@ -28,19 +28,18 @@ export default function Pin({
   ) => {
     if (!stage) return;
 
-    const nextAct = getNextAct(stage);
-    if (!nextAct) return;
+    const nextActs = getNextActs(stage);
+    if (!nextActs) return;
 
-    setOverlay(nextAct);
+    setOverlay({
+      stage,
+      acts: nextActs,
+    });
   };
 
   return (
-    <div
-      onClick={() => overlay(stage)}
-      className="aspect-square rounded-full bg-[#F03228] text-[#FFFFFF] border-[#8f1b15] border-2 flex justify-center items-center"
-      style={{ width: size, height: size }}
-    >
-      {content}
+    <div onClick={() => overlay(stage)}>
+      <Image src={image} alt="Pin on map" width={size} height={size} />
     </div>
   );
 }
