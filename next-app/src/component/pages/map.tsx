@@ -10,7 +10,7 @@ import Pin from "@/component/pin";
 import { pins } from "@/app/[lng]/map/pins";
 import PinOverlay from "../pin-overlay";
 import { AnimatePresence } from "framer-motion";
-import { useTranslation } from "@/app/i18n";
+import { translation } from "@/app/i18n";
 import Image from "next/image";
 
 interface Act {
@@ -21,18 +21,20 @@ interface Act {
   info: string | null;
 }
 
-export default function Map({ params }: { params: { lng: string } }) {
+export default function Map({ params }: { params: Promise<{ lng: string }> }) {
   const [overlay, setOverlay] = useState<null | {
     stage: string;
     act: Act;
   }>(null);
-  const [t, setT] = useState<any>(() => (key: string) => key);
+  const [t, setT] = useState<(key: string) => string>(
+    () => (key: string) => key
+  );
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     async function fetchLngAndTranslation() {
       const { lng } = await params;
-      const { t } = await useTranslation(lng, "map");
+      const { t } = await translation(lng, "map");
       setT(() => t);
     }
     fetchLngAndTranslation();

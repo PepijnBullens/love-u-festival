@@ -21,7 +21,7 @@ interface TranslationOptions {
   keyPrefix?: string;
 }
 
-export async function useTranslation(
+export async function translation(
   lng: string,
   ns: string,
   options: TranslationOptions = {}

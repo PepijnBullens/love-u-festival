@@ -5,11 +5,9 @@ import { useEffect, useState } from "react";
 
 export default function Footer({
   params,
-  theme,
   currentPage,
 }: {
-  params: { lng: string };
-  theme: string;
+  params: Promise<{ lng: string }>;
   currentPage: string;
 }) {
   const [lng, setLng] = useState<string>("");

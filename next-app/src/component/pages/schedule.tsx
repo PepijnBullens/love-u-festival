@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { useTranslation } from "@/app/i18n";
+import { translation } from "@/app/i18n";
 
 export default async function Schedule({
   params,
 }: {
-  params: { lng: string };
+  params: Promise<{ lng: string }>;
 }) {
   const { lng } = await params;
-  const { t } = await useTranslation(lng, "schedule");
+  const { t } = await translation(lng, "schedule");
 
   return (
     <>

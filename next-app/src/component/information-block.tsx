@@ -21,7 +21,7 @@ export default function InformationBlock({
 
   useEffect(() => {
     if (collapsible && collapsed === null) setCollapsed(true);
-  }, [collapsible]);
+  }, [collapsible, collapsed]);
 
   const toggle = () => {
     if (!collapsible) return;

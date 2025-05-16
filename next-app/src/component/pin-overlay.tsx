@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
-import Icon from "@/component/icon";
 import Image from "next/image";
-import { useState } from "react";
+import Icon from "@/component/icon";
 
 interface Act {
   start: string;
@@ -27,7 +26,7 @@ export default function PinOverlay({
       act: Act;
     }
   ) => void;
-  t: any;
+  t: (key: string) => string;
 }) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -46,17 +45,6 @@ export default function PinOverlay({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [setOverlay]);
-
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-  useEffect(() => {
-    function updateDimensions() {
-      setDimensions({ width: window.innerWidth, height: window.innerHeight });
-    }
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
 
   return (
     <>
@@ -111,10 +99,11 @@ export default function PinOverlay({
                 </h4>
               </div>
               {overlay.act.image && (
-                <img
+                <Image
                   src={overlay.act.image}
                   alt={overlay.act.image}
                   className="h-full w-full object-cover rounded-md"
+                  fill
                 />
               )}
             </div>

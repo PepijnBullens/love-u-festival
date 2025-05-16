@@ -2,7 +2,6 @@
 
 import Header from "@/component/header";
 import Footer from "@/component/footer";
-import { useTheme } from "@/context/theme-context";
 import { usePathname } from "next/navigation";
 
 export default function MainLayout({
@@ -10,10 +9,9 @@ export default function MainLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lng: string };
+  params: Promise<{ lng: string }>;
 }) {
   const pathname = usePathname().split("/").pop() || "";
-  const { theme } = useTheme();
 
   return (
     <main
@@ -31,7 +29,7 @@ export default function MainLayout({
       <section className="flex flex-col h-[80svh] overflow-auto">
         {children}
       </section>
-      <Footer params={params} theme={theme} currentPage={pathname} />
+      <Footer params={params} currentPage={pathname} />
     </main>
   );
 }

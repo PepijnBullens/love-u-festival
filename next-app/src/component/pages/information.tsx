@@ -1,4 +1,4 @@
-import { useTranslation } from "@/app/i18n";
+import { translation } from "@/app/i18n";
 import InformationBlock from "@/component/information-block";
 import InformationBlockBig from "@/component/information-block-big";
 import Icon from "@/component/icon";
@@ -8,10 +8,10 @@ import { informationLayout } from "@/app/[lng]/information/information-layout";
 export default async function Information({
   params,
 }: {
-  params: { lng: string };
+  params: Promise<Promise<{ lng: string }>>;
 }) {
   const { lng } = await params;
-  const { t } = await useTranslation(lng, "information");
+  const { t } = await translation(lng, "information");
 
   return (
     <section className="p-4 flex flex-col gap-2">

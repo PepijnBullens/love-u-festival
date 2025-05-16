@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  Suspense,
+} from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 type ThemeContextType = {
@@ -11,6 +17,14 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense>
+      <ThemeProviderInner>{children}</ThemeProviderInner>
+    </Suspense>
+  );
+}
+
+function ThemeProviderInner({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 

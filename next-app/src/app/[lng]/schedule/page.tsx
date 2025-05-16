@@ -1,5 +1,9 @@
 import Schedule from "@/component/pages/schedule";
 
-export default function SchedulePage({ params }: { params: { lng: string } }) {
+export default function SchedulePage({
+  params,
+}: {
+  params: Promise<{ lng: string }>;
+}) {
   return <Schedule params={params} />;
 }

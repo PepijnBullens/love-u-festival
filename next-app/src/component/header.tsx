@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import VisualModeSwitcher from "@/component/switchers/theme-switcher";
 import Logo from "@/component/logo";
@@ -11,7 +11,7 @@ export default function Header({
   params,
 }: {
   currentPage: string;
-  params: { lng: string };
+  params: Promise<{ lng: string }>;
 }) {
   const [lng, setLng] = useState<string>("");
 
@@ -21,7 +21,7 @@ export default function Header({
       setLng(lng);
     }
     fetchLanguage();
-  }, []);
+  }, [params]);
 
   return (
     <nav className="w-full p-4 flex justify-between items-center">
@@ -32,7 +32,7 @@ export default function Header({
         <Logo width={24} height={24} />
       </Link>
       <div className="flex gap-2">
-        <LanguageSwitcher currentPage={currentPage} lng={lng} />
+        <LanguageSwitcher currentPage={currentPage} />
         <VisualModeSwitcher />
       </div>
     </nav>

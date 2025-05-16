@@ -7,12 +7,13 @@ import Icon from "@/component/icon";
 import { useOverlay } from "@/context/overlay-context";
 import { useRouter, useSearchParams } from "next/navigation";
 
+// Import flag icons statically
+import * as FlagIcons from "country-flag-icons/react/3x2";
+
 export default function LanguageSwitcher({
   currentPage,
-  lng,
 }: {
   currentPage: string;
-  lng: string;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -34,9 +35,10 @@ export default function LanguageSwitcher({
         showOverlay(
           <div className="flex gap-2 flex-col">
             {languages.map((language) => {
-              const FlagIcon = require(`country-flag-icons/react/3x2`)[
-                flags[language as Language]?.toUpperCase()
-              ];
+              const flagKey = flags[
+                language as Language
+              ]?.toUpperCase() as keyof typeof FlagIcons;
+              const FlagIcon = FlagIcons[flagKey];
 
               return (
                 <div
