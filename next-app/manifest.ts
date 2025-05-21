@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "❤️U Festival",
+    name: "❤️ U Festival",
     short_name: "❤️UF",
     description:
-      "❤️U Festival. An addition to the UIT, for (new) students in the Utrecht region",
+      "❤️ U Festival. An addition to the UIT, for (new) students in the Utrecht region",
     start_url: "/en/information",
     display: "standalone",
     background_color: "#ffffff",

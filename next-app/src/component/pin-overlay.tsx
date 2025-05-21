@@ -90,7 +90,7 @@ export default function PinOverlay({
         {overlay && (
           <div className="flex justify-between gap-2 w-full h-full flex-col">
             <div className="flex h-full justify-between items-end relative">
-              <div className="flex flex-col absolute left-4 bottom-4 gap-1">
+              <div className="flex flex-col absolute left-4 bottom-4 gap-1 z-100">
                 <h3 className="sansation-bold text-md bg-white rounded-xs w-min px-1">
                   {overlay.act.start}
                 </h3>

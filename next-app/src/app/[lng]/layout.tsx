@@ -7,9 +7,9 @@ import "./globals.css";
 import MainLayout from "@/layout/main-layout";
 
 export const metadata: Metadata = {
-  title: "❤️U Festival",
+  title: "❤️ U Festival",
   description:
-    "❤️U Festival. An addition to the UIT, for (new) students in the Utrecht region",
+    "❤️ U Festival. An addition to the UIT, for (new) students in the Utrecht region",
   generator: "Next.js",
   manifest: "/manifest.ts",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
