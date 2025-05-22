@@ -5,7 +5,7 @@ import { theLake } from "@/app/[lng]/schedule/schedule";
 import { theClub } from "@/app/[lng]/schedule/schedule";
 import { hangar } from "@/app/[lng]/schedule/schedule";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Helper to parse "HH:mm" to minutes
 function timeToMinutes(time: string) {
@@ -79,79 +79,108 @@ export default function Schedule() {
 
   const stages = [poton, theLake, theClub, hangar];
 
-  return (
-    <section className="w-full p-2 flex overflow-hidden">
-      <div className="flex flex-col p-2 gap-2">
-        <div className="shadow-information-block w-full rounded-md bg-white h-8"></div>
-        {[poton.label, theLake.label, theClub.label, hangar.label].map(
-          (label) => (
-            <div
-              key={label}
-              className="uppercase px-4 h-[4rem] shadow-information-block flex justify-center items-center min-w-full w-max rounded-md bg-white"
-            >
-              {label}
-            </div>
-          )
-        )}
-      </div>
+  const [currentTime, setCurrentTime] = useState<string>(() => {
+    const now = new Date();
+    return now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  });
 
-      <div className="grow p-2 overflow-auto">
-        <div
-          className="grid gap-2"
-          style={{
-            gridTemplateColumns: `repeat(${times.length}, minmax(3.5rem, 1fr))`,
-            position: "relative",
-          }}
-        >
-          {/* Time headers */}
-          {times.map((time, idx) => (
-            <div
-              key={`time-${time}`}
-              className="h-8 flex justify-center items-center px-4 shadow-information-block w-full rounded-md bg-white"
-              style={{
-                gridRow: 1,
-                gridColumn: idx + 1,
-                zIndex: 2,
-              }}
-            >
-              {time}
-            </div>
-          ))}
-          {/* Stage rows */}
-          {stages.map((stage, stageIdx) =>
-            getLineup(stage).map((act: any, actIdx: number) => (
+  // Update current time every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+      );
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="grow flex flex-col justify-end items-center">
+      <section className="grow flex justify-center items-center uppercase sansation-bold text-xl">
+        {currentTime}
+      </section>
+      <section className="w-full p-2 flex overflow-hidden">
+        <div className="flex flex-col p-2 gap-2">
+          <div className="shadow-information-block w-full rounded-md bg-white h-8"></div>
+          {[poton.label, theLake.label, theClub.label, hangar.label].map(
+            (label) => (
               <div
-                key={act.label + act.start}
-                style={{
-                  ...getActGridProps(act),
-                  gridRow: stageIdx + 2, // +2: 1 for header, 1-based index
-                  height: "4rem",
-                  minWidth: "3rem",
-                  background: "#fff",
-                  borderRadius: "0.375rem",
-                  boxShadow: "0 2px 8px 0 rgba(0,0,0,0.08)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "0 0.5rem",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  textOverflow: "ellipsis",
-                  border: "1px solid #eee",
-                  fontWeight: 500,
-                  fontSize: "0.95rem",
-                  cursor: "pointer",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-                title={`${act.label} (${act.start} - ${act.end})`}
+                key={label}
+                className="uppercase px-4 h-[4rem] shadow-information-block flex justify-center items-center min-w-full w-max rounded-md bg-white"
               >
-                {act.label}
+                {label}
               </div>
-            ))
+            )
           )}
         </div>
-      </div>
-    </section>
+
+        <div className="grow p-2 overflow-auto">
+          <div
+            className="grid gap-2"
+            style={{
+              gridTemplateColumns: `repeat(${times.length}, minmax(3.5rem, 1fr))`,
+              position: "relative",
+            }}
+          >
+            {/* Time headers */}
+            {times.map((time, idx) => (
+              <div
+                key={`time-${time}`}
+                className="h-8 flex justify-center items-center px-4 shadow-information-block w-full rounded-md bg-white"
+                style={{
+                  gridRow: 1,
+                  gridColumn: idx + 1,
+                  zIndex: 2,
+                }}
+              >
+                {time}
+              </div>
+            ))}
+            {/* Stage rows */}
+            {stages.map((stage, stageIdx) =>
+              getLineup(stage).map((act: any, actIdx: number) => (
+                <div
+                  key={act.label + act.start}
+                  style={{
+                    ...getActGridProps(act),
+                    gridRow: stageIdx + 2, // +2: 1 for header, 1-based index
+                    height: "4rem",
+                    minWidth: "3rem",
+                    background: "#fff",
+                    borderRadius: "0.375rem",
+                    boxShadow: "0 2px 8px 0 rgba(0,0,0,0.08)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "0 0.5rem",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                    border: "1px solid #eee",
+                    fontWeight: 500,
+                    fontSize: "0.95rem",
+                    cursor: "pointer",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                  title={`${act.label} (${act.start} - ${act.end})`}
+                >
+                  {act.label}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
