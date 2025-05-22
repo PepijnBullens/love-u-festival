@@ -60,7 +60,7 @@ export default function InformationBlockBig({
             {content.map((item, index) => (
               <section key={`${item.title}-${index}`}>
                 <h2 className="sansation-bold">{item.title}</h2>
-                <p className="text-sm text-[#767676] dark:bg-[#8B8B8B]">
+                <p className="text-sm text-[#767676] dark:text-[#8B8B8B]">
                   {item.content}
                 </p>
               </section>
