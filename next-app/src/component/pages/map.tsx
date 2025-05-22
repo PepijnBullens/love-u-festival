@@ -12,6 +12,7 @@ import PinOverlay from "../pin-overlay";
 import { AnimatePresence } from "framer-motion";
 import { translation } from "@/app/i18n";
 import Image from "next/image";
+import { useDay } from "@/context/day-context";
 
 interface Act {
   start: string;
@@ -48,6 +49,8 @@ export default function Map({ params }: { params: Promise<{ lng: string }> }) {
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
   }, [params]);
+
+  const { day, setDayFunc } = useDay();
 
   return (
     <>
@@ -97,6 +100,29 @@ export default function Map({ params }: { params: Promise<{ lng: string }> }) {
           </div>
         </TransformComponent>
       </TransformWrapper>
+
+      <section className="flex gap-2 w-full px-4">
+        <div
+          className={`${
+            day === "saturday"
+              ? "translate-y-[1px] bg-[#f6625a]"
+              : "shadow-information-block"
+          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
+          onClick={() => setDayFunc("saturday")}
+        >
+          {t("saturday")}
+        </div>
+        <div
+          className={`${
+            day === "sunday"
+              ? "translate-y-[1px] bg-[#f6625a]"
+              : "shadow-information-block"
+          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
+          onClick={() => setDayFunc("sunday")}
+        >
+          {t("sunday")}
+        </div>
+      </section>
     </>
   );
 }

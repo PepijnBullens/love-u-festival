@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, Suspense } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  Suspense,
+  useEffect,
+} from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 type DayContextType = {
@@ -20,6 +26,7 @@ export function DayProvider({ children }: { children: React.ReactNode }) {
 
 function DayProviderInner({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [day, setDay] = useState<"saturday" | "sunday">(() => {
     const urlDay = searchParams.get("day");
@@ -28,6 +35,12 @@ function DayProviderInner({ children }: { children: React.ReactNode }) {
     }
     return "sunday";
   });
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set("day", day);
+    router.replace(`?${params.toString()}`);
+  }, [day, searchParams, router]);
 
   const setDayFunc = (day: "saturday" | "sunday") => {
     setDay(day);

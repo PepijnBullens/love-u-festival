@@ -134,17 +134,19 @@ export default function Schedule({
         <div
           className={`${
             day === "saturday"
-              ? "translate-y-[1px] bg-[#000000]"
+              ? "translate-y-[1px] bg-[#f6625a]"
               : "shadow-information-block"
-          } w-full p-4 bg-[#FFFFFF] flex justify-center items-center rounded-md cursor-pointer`}
+          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
           onClick={() => setDayFunc("saturday")}
         >
           {t("saturday")}
         </div>
         <div
           className={`${
-            day === "sunday" ? "translate-y-[1px]" : "shadow-information-block"
-          } w-full p-4 bg-[#FFFFFF] flex justify-center items-center rounded-md cursor-pointer`}
+            day === "sunday"
+              ? "translate-y-[1px] bg-[#f6625a]"
+              : "shadow-information-block"
+          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
           onClick={() => setDayFunc("sunday")}
         >
           {t("sunday")}
