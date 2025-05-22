@@ -59,7 +59,7 @@ export default function Map({ params }: { params: Promise<{ lng: string }> }) {
 
       <TransformWrapper centerZoomedOut={true}>
         <TransformComponent>
-          <div className="p-4">
+          <div className="p-4 w-full! h-full!">
             <Image
               src="/map.png"
               alt="Map"
@@ -81,8 +81,8 @@ export default function Map({ params }: { params: Promise<{ lng: string }> }) {
                   key={`${pin.x}-${pin.y}-${index}`}
                   style={{
                     position: "absolute",
-                    left: `${pin.x}px`,
-                    top: `${pin.y}px`,
+                    left: `${pin.x}%`,
+                    top: `${pin.y}%`,
                   }}
                 >
                   <Pin
