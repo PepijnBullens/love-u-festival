@@ -126,31 +126,9 @@ export default function Schedule({
   }, []);
 
   return (
-    <div className="grow flex flex-col justify-end items-center">
+    <div className="grow flex flex-col justify-end items-center py-2">
       <section className="grow flex justify-center items-center uppercase sansation-bold text-xl">
         {currentTime}
-      </section>
-      <section className="flex gap-2 w-full px-4">
-        <div
-          className={`${
-            day === "saturday"
-              ? "translate-y-[1px] bg-[#f6625a]"
-              : "shadow-information-block"
-          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
-          onClick={() => setDayFunc("saturday")}
-        >
-          {t("saturday")}
-        </div>
-        <div
-          className={`${
-            day === "sunday"
-              ? "translate-y-[1px] bg-[#f6625a]"
-              : "shadow-information-block"
-          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
-          onClick={() => setDayFunc("sunday")}
-        >
-          {t("sunday")}
-        </div>
       </section>
       <section className="w-full p-2 flex overflow-hidden">
         <div className="flex flex-col p-2 gap-2">
@@ -222,6 +200,28 @@ export default function Schedule({
               ))
             )}
           </div>
+        </div>
+      </section>
+      <section className="flex gap-2 w-full px-4">
+        <div
+          className={`${
+            day === "saturday"
+              ? "translate-y-[1px] bg-[#f6625a]"
+              : "shadow-information-block"
+          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
+          onClick={() => setDayFunc("saturday")}
+        >
+          {t("saturday")}
+        </div>
+        <div
+          className={`${
+            day === "sunday"
+              ? "translate-y-[1px] bg-[#f6625a]"
+              : "shadow-information-block"
+          } w-full p-4 bg-[#F03228] text-white flex justify-center items-center rounded-md cursor-pointer`}
+          onClick={() => setDayFunc("sunday")}
+        >
+          {t("sunday")}
         </div>
       </section>
     </div>
