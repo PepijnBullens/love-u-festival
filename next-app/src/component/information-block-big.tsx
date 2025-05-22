@@ -18,7 +18,7 @@ export default function InformationBlockBig({
   };
 
   return (
-    <article className="relative w-full rounded-md px-6 py-4 flex flex-col justify-between shadow-information-block bg-[#FFFFFF] ">
+    <article className="relative w-full rounded-md px-6 py-4 flex flex-col justify-between shadow-information-block bg-[#FFFFFF] dark:bg-[#1F1F1F]">
       <div className="flex justify-between items-center h-8">
         <h2 className="sansation-bold text-xl">{title}</h2>
         <motion.div
@@ -60,7 +60,9 @@ export default function InformationBlockBig({
             {content.map((item, index) => (
               <section key={`${item.title}-${index}`}>
                 <h2 className="sansation-bold">{item.title}</h2>
-                <p className="text-sm text-[#767676]">{item.content}</p>
+                <p className="text-sm text-[#767676] dark:bg-[#8B8B8B]">
+                  {item.content}
+                </p>
               </section>
             ))}
           </motion.div>

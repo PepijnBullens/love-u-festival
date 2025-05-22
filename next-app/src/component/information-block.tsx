@@ -29,7 +29,7 @@ export default function InformationBlock({
   };
 
   return (
-    <article className="relative w-full rounded-md px-6 py-4 flex flex-col justify-between shadow-information-block bg-[#FFFFFF] ">
+    <article className="relative w-full rounded-md px-6 py-4 flex flex-col justify-between shadow-information-block bg-[#FFFFFF] dark:bg-[#1F1F1F]">
       <div className="flex justify-between items-center h-8">
         <h2 className="sansation-bold text-xl">{title}</h2>
         {collapsible ? (

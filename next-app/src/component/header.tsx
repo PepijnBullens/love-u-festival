@@ -27,9 +27,9 @@ export default function Header({
     <nav className="w-full p-4 flex justify-between items-center">
       <Link
         href={`/${lng}/information`}
-        className="z-200 w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] shadow-icon cursor-pointer"
+        className="z-200 w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] dark:bg-[#1F1F1F] shadow-icon cursor-pointer"
       >
-        <Logo width={24} height={24} />
+        <Logo width={24} height={24} themeOverride={null} />
       </Link>
       <div className="flex gap-2">
         <LanguageSwitcher currentPage={currentPage} />

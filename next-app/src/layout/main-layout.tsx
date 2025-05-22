@@ -3,6 +3,7 @@
 import Header from "@/component/header";
 import Footer from "@/component/footer";
 import { usePathname } from "next/navigation";
+import { useTheme } from "@/context/theme-context";
 
 export default function MainLayout({
   children,
@@ -12,16 +13,19 @@ export default function MainLayout({
   params: Promise<{ lng: string }>;
 }) {
   const pathname = usePathname().split("/").pop() || "";
+  const { theme } = useTheme();
 
   return (
     <main
       className={`
       ${
-        pathname === "information"
-          ? "blue-gradient"
-          : pathname === "schedule"
-          ? "red-gradient"
-          : ""
+        theme === "light"
+          ? pathname === "information"
+            ? "blue-gradient"
+            : pathname === "schedule"
+            ? "red-gradient"
+            : ""
+          : null
       }
     flex flex-col h-full`}
     >

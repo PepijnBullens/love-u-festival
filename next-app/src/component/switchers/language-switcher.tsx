@@ -55,13 +55,13 @@ export default function LanguageSwitcher({
           </div>
         )
       }
-      className="w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] shadow-icon cursor-pointer"
+      className="w-[3rem] aspect-square flex justify-center items-center rounded-xl bg-[#FFFFFF] dark:bg-[#1F1F1F] shadow-icon cursor-pointer"
     >
       <Icon
         name="translate"
         width={24}
         height={24}
-        themeMode={false}
+        themeMode={true}
         reversed={false}
       />
     </div>

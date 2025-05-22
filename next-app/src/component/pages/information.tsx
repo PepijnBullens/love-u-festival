@@ -18,7 +18,7 @@ export default async function Information({
       <h1 className="sansation-bold text-3xl flex items-center gap-1">
         The
         <span>
-          <Logo width={32} height={32} />
+          <Logo width={32} height={32} themeOverride={null} />
         </span>
         Festival
       </h1>

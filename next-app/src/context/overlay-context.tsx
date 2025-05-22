@@ -45,7 +45,7 @@ export function OverlayProvider({ children }: { children: ReactNode }) {
                 width: size,
                 height: size,
               }}
-              className="fixed top-0 left-0 -translate-1/2 z-50 flex justify-center items-center rounded-full bg-black"
+              className="fixed top-0 left-0 -translate-1/2 z-50 flex justify-center items-center rounded-full bg-black dark:bg-[#1F1F1F]"
               initial={{
                 scale: "0%",
               }}

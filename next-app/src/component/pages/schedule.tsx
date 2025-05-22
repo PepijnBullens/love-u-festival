@@ -110,12 +110,12 @@ export default function Schedule() {
       </section>
       <section className="w-full p-2 flex overflow-hidden">
         <div className="flex flex-col p-2 gap-2">
-          <div className="shadow-information-block w-full rounded-md bg-white h-8"></div>
+          <div className="shadow-information-block w-full rounded-md bg-white h-8 dark:bg-[#1F1F1F]"></div>
           {[poton.label, theLake.label, theClub.label, hangar.label].map(
             (label) => (
               <div
                 key={label}
-                className="uppercase px-4 h-[4rem] shadow-information-block flex justify-center items-center min-w-full w-max rounded-md bg-white"
+                className="uppercase px-4 h-[4rem] shadow-information-block flex justify-center items-center min-w-full w-max rounded-md bg-[#FFFFFF] dark:bg-[#1F1F1F]"
               >
                 {label}
               </div>
@@ -135,7 +135,7 @@ export default function Schedule() {
             {times.map((time, idx) => (
               <div
                 key={`time-${time}`}
-                className="h-8 flex justify-center items-center px-4 shadow-information-block w-full rounded-md bg-white"
+                className="h-8 flex justify-center items-center px-4 shadow-information-block w-full rounded-md bg-[#FFFFFF] dark:bg-[#1F1F1F]"
                 style={{
                   gridRow: 1,
                   gridColumn: idx + 1,
@@ -150,12 +150,12 @@ export default function Schedule() {
               getLineup(stage).map((act: any, actIdx: number) => (
                 <div
                   key={act.label + act.start}
+                  className="bg-[#FFFFFF] dark:bg-[#1F1F1F]"
                   style={{
                     ...getActGridProps(act),
                     gridRow: stageIdx + 2, // +2: 1 for header, 1-based index
                     height: "4rem",
                     minWidth: "3rem",
-                    background: "#fff",
                     borderRadius: "0.375rem",
                     boxShadow: "0 2px 8px 0 rgba(0,0,0,0.08)",
                     display: "flex",
@@ -165,7 +165,6 @@ export default function Schedule() {
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     textOverflow: "ellipsis",
-                    border: "1px solid #eee",
                     fontWeight: 500,
                     fontSize: "0.95rem",
                     cursor: "pointer",

@@ -24,7 +24,7 @@ export default function Footer({
   const currentPosition = items.indexOf(currentPage) - 1;
 
   return (
-    <footer className="relative w-full flex justify-center items-center p-8 gap-8 bg-[#FFFFFF]">
+    <footer className="relative w-full flex justify-center items-center p-8 gap-8 bg-[#FFFFFF] dark:bg-[#000000]">
       <motion.div
         initial={{
           x: `${currentPosition * (48 + 24)}px`,
@@ -32,7 +32,7 @@ export default function Footer({
         animate={{
           x: `${currentPosition * (48 + 24)}px`,
         }}
-        className="w-[54px] z-10 left-1/2 top-1/2 rounded-xl -translate-1/2 aspect-square bg-[#000000] absolute"
+        className="w-[54px] z-10 left-1/2 top-1/2 rounded-xl -translate-1/2 aspect-square bg-[#000000] dark:bg-[#FFFFFF] absolute"
       ></motion.div>
       {items.map((item) => (
         <Link key={item} href={`/${lng}/${item}`} className="z-50">
