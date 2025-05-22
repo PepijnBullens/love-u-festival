@@ -70,7 +70,7 @@ export default function PinOverlay({
         }}
         className="overflow-auto fixed flex flex-col gap-8 top-1/2 left-1/2 -translate-1/2 bg-[#FFFFFF] z-[1100] w-[calc(100%-2rem)] h-[calc(100%-2rem)] p-4 shadow-information-block rounded-xl"
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-1">
           <h2 className="text-xl uppercase sansation-bold">
             {t("next-up")} {overlay?.stage}
           </h2>

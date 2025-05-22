@@ -1,5 +1,6 @@
 import getNextAct from "@/helper/getNextActs";
 import Image from "next/image";
+import { useDay } from "@/context/day-context";
 
 interface Act {
   start: string;
@@ -25,12 +26,14 @@ export default function Pin({
     }
   ) => void;
 }) {
+  const { day } = useDay();
+
   const overlay = (
     stage: "Poton" | "The Lake" | "The Club" | "Hangar" | null
   ) => {
     if (!stage) return;
 
-    const nextAct = getNextAct(stage);
+    const nextAct = getNextAct(stage, day);
     if (!nextAct) return;
 
     setOverlay({

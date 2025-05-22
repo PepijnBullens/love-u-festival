@@ -13,6 +13,7 @@ interface Act {
 
 interface Lineup {
   saturday?: Act[];
+  sunday?: Act[];
 }
 
 interface Stage {
@@ -20,24 +21,25 @@ interface Stage {
 }
 
 export default function getNextAct(
-  stage: "Poton" | "The Lake" | "The Club" | "Hangar"
+  stage: "Poton" | "The Lake" | "The Club" | "Hangar",
+  day: "saturday" | "sunday"
 ) {
   let acts;
 
   if (stage === "Hangar" && hangar) {
-    acts = (hangar as Stage)?.lineup?.saturday;
+    acts = (hangar as Stage)?.lineup?.[day];
   }
 
   if (stage === "Poton" && poton) {
-    acts = (poton as Stage)?.lineup?.saturday;
+    acts = (poton as Stage)?.lineup?.[day];
   }
 
   if (stage === "The Lake" && theLake) {
-    acts = (theLake as Stage)?.lineup?.saturday;
+    acts = (theLake as Stage)?.lineup?.[day];
   }
 
   if (stage === "The Club" && theClub) {
-    acts = (theClub as Stage)?.lineup?.saturday;
+    acts = (theClub as Stage)?.lineup?.[day];
   }
 
   if (acts) {

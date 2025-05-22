@@ -6,6 +6,8 @@ import { theClub } from "@/app/[lng]/schedule/schedule";
 import { hangar } from "@/app/[lng]/schedule/schedule";
 
 import { useState, useEffect } from "react";
+import { useDay } from "@/context/day-context";
+import { translation } from "@/app/i18n";
 
 // Helper to parse "HH:mm" to minutes
 function timeToMinutes(time: string) {
@@ -20,15 +22,35 @@ function minutesToTime(minutes: number) {
   return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
 }
 
-export default function Schedule() {
-  const [day, setDay] = useState<"saturday" | "sunday">("saturday");
+// Define allowed day keys
+type TypedDay = "saturday" | "sunday";
+
+export default function Schedule({
+  params,
+}: {
+  params: Promise<{ lng: string }>;
+}) {
+  const [t, setT] = useState<(key: string) => string>(
+    () => (key: string) => key
+  );
+
+  useEffect(() => {
+    async function fetchLngAndTranslation() {
+      const { lng } = await params;
+      const { t } = await translation(lng, "schedule");
+      setT(() => t);
+    }
+    fetchLngAndTranslation();
+  }, [params]);
+
+  const { day, setDayFunc } = useDay();
 
   // Get all start and end times from all stages for the selected day
   const allActs = [
-    ...(poton.lineup[day] || []),
-    ...(theLake.lineup[day] || []),
-    ...(theClub.lineup[day] || []),
-    ...(hangar.lineup[day] || []),
+    ...(poton.lineup[day as TypedDay] || []),
+    ...(theLake.lineup[day as TypedDay] || []),
+    ...(theClub.lineup[day as TypedDay] || []),
+    ...(hangar.lineup[day as TypedDay] || []),
   ];
 
   // Get all start times and all end times
@@ -62,7 +84,7 @@ export default function Schedule() {
 
   // Helper to get lineup for a stage
   function getLineup(stage: any) {
-    return stage.lineup[day] || [];
+    return stage.lineup[day as TypedDay] || [];
   }
 
   // Helper to get act's grid position and span
@@ -107,6 +129,26 @@ export default function Schedule() {
     <div className="grow flex flex-col justify-end items-center">
       <section className="grow flex justify-center items-center uppercase sansation-bold text-xl">
         {currentTime}
+      </section>
+      <section className="flex gap-2 w-full px-4">
+        <div
+          className={`${
+            day === "saturday"
+              ? "translate-y-[1px] bg-[#000000]"
+              : "shadow-information-block"
+          } w-full p-4 bg-[#FFFFFF] flex justify-center items-center rounded-md cursor-pointer`}
+          onClick={() => setDayFunc("saturday")}
+        >
+          {t("saturday")}
+        </div>
+        <div
+          className={`${
+            day === "sunday" ? "translate-y-[1px]" : "shadow-information-block"
+          } w-full p-4 bg-[#FFFFFF] flex justify-center items-center rounded-md cursor-pointer`}
+          onClick={() => setDayFunc("sunday")}
+        >
+          {t("sunday")}
+        </div>
       </section>
       <section className="w-full p-2 flex overflow-hidden">
         <div className="flex flex-col p-2 gap-2">

@@ -5,5 +5,5 @@ export default function SchedulePage({
 }: {
   params: Promise<{ lng: string }>;
 }) {
-  return <Schedule />;
+  return <Schedule params={params} />;
 }

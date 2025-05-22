@@ -57,7 +57,7 @@ export default function Map({ params }: { params: Promise<{ lng: string }> }) {
         )}
       </AnimatePresence>
 
-      <TransformWrapper centerZoomedOut={true}>
+      <TransformWrapper centerZoomedOut={false} initialScale={2}>
         <TransformComponent>
           <div className="p-4 w-full! h-full!">
             <Image
