@@ -53,7 +53,7 @@ export default function Map({ params }: { params: Promise<{ lng: string }> }) {
   const { day, setDayFunc } = useDay();
 
   return (
-    <>
+    <div className="w-full py-2 flex flex-col h-full">
       <AnimatePresence>
         {overlay && (
           <PinOverlay overlay={overlay} setOverlay={setOverlay} t={t} />
@@ -123,6 +123,6 @@ export default function Map({ params }: { params: Promise<{ lng: string }> }) {
           {t("sunday")}
         </div>
       </section>
-    </>
+    </div>
   );
 }
