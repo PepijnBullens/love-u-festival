@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Icon from "@/component/icon";
 
@@ -46,6 +46,17 @@ export default function PinOverlay({
     };
   }, [setOverlay]);
 
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    function updateDimensions() {
+      setDimensions({ width: window.innerWidth, height: window.innerHeight });
+    }
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
   return (
     <>
       <motion.div
@@ -68,7 +79,7 @@ export default function PinOverlay({
           opacity: 0,
           scale: 0.9,
         }}
-        className="overflow-auto fixed flex flex-col gap-8 top-1/2 left-1/2 -translate-1/2 bg-[#FFFFFF] z-[1100] w-[calc(100%-2rem)] h-[calc(100%-2rem)] p-4 shadow-information-block rounded-xl"
+        className="fixed flex flex-col gap-8 top-1/2 left-1/2 -translate-1/2 bg-[#FFFFFF] dark:bg-[#1F1F1F] z-[1100] w-[calc(100%-2rem)] h-[60svh] p-4 shadow-information-block rounded-xl"
       >
         <div className="flex justify-between items-center gap-1">
           <h2 className="text-xl uppercase sansation-bold">
@@ -88,24 +99,33 @@ export default function PinOverlay({
           </div>
         </div>
         {overlay && (
-          <div className="flex justify-between gap-2 w-full h-full flex-col">
+          <div className="flex justify-between gap-2 w-full h-full overflow-auto no-scrollbar flex-col">
             <div className="flex h-full justify-between items-end relative">
               <div className="flex flex-col absolute left-4 bottom-4 gap-1 z-100">
-                <h3 className="sansation-bold text-md bg-white rounded-xs w-min px-1">
+                <h3 className="text-xl bg-white dark:bg-[#1F1F1F] rounded-xs w-min px-1">
                   {overlay.act.start}
                 </h3>
-                <h4 className="text-base bg-white rounded-xs px-1">
+                <h4 className="text-2xl bg-white dark:bg-[#1F1F1F] rounded-xs px-2 py-1">
                   {overlay.act.label}
                 </h4>
               </div>
-              {overlay.act.image && (
-                <Image
-                  src={overlay.act.image}
-                  alt={overlay.act.image}
-                  className="h-full w-full object-cover rounded-md"
-                  fill
-                />
-              )}
+              {overlay.act.image &&
+                (overlay.act.info ? (
+                  <Image
+                    src={overlay.act.image}
+                    alt={overlay.act.image}
+                    className="object-cover rounded-md"
+                    height={500}
+                    width={dimensions.width - (32 + 16 * 2)}
+                  />
+                ) : (
+                  <Image
+                    src={overlay.act.image}
+                    alt={overlay.act.image}
+                    className="object-cover rounded-md"
+                    fill
+                  />
+                ))}
             </div>
             {overlay.act.info && <p>{overlay.act.info}</p>}
           </div>
