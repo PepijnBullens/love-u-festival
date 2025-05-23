@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "❤️ U Festival. An addition to the UIT, for (new) students in the Utrecht region",
   generator: "Next.js",
-  manifest: "/manifest.webmanifest",
+  manifest: "/manifest.json",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
   icons: [
     { rel: "apple-touch-icon", url: "/logo/light.png" },
