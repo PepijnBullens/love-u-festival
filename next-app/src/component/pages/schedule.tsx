@@ -71,7 +71,7 @@ export default function Schedule({
     .slice(-1)[0];
 
   // Generate times array in 15-min intervals
-  let times: string[] = [];
+  const times: string[] = [];
   if (earliest && latest) {
     const start = timeToMinutes(earliest);
     // Treat "00:00" as 24:00 for the end of the day
@@ -83,12 +83,19 @@ export default function Schedule({
   }
 
   // Helper to get lineup for a stage
-  function getLineup(stage: any) {
+  type Stage = {
+    label: string;
+    lineup: Record<TypedDay, { label: string; start: string; end: string }[]>;
+  };
+
+  function getLineup(stage: Stage) {
     return stage.lineup[day as TypedDay] || [];
   }
 
+  type Act = { label: string; start: string; end: string };
+
   // Helper to get act's grid position and span
-  function getActGridProps(act: any) {
+  function getActGridProps(act: Act) {
     if (!earliest || !latest) return {};
     // Find the index of the start and end time in the times array
     const startIdx = times.findIndex((t) => t === act.start) + 1; // +1 for grid (1-based)
@@ -169,7 +176,7 @@ export default function Schedule({
             ))}
             {/* Stage rows */}
             {stages.map((stage, stageIdx) =>
-              getLineup(stage).map((act: any, actIdx: number) => (
+              getLineup(stage).map((act: Act) => (
                 <div
                   key={act.label + act.start}
                   className="bg-[#FFFFFF] dark:bg-[#1F1F1F]"
