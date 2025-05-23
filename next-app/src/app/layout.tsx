@@ -1,10 +1,5 @@
-import { ThemeProvider } from "@/context/theme-context";
-import { OverlayProvider } from "@/context/overlay-context";
 import type { Metadata } from "next";
-import { languages } from "../i18n/settings";
-import "./globals.css";
-import MainLayout from "@/layout/main-layout";
-import { DayProvider } from "@/context/day-context";
+import "./[lng]/globals.css";
 
 export const metadata: Metadata = {
   title: "❤️ U Festival",
@@ -25,29 +20,15 @@ export const viewport = {
     "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
 };
 
-export async function generateStaticParams() {
-  return languages.map((lng) => ({ lng }));
-}
-
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lng: string }>;
 }>) {
-  const { lng } = await params;
-
   return (
-    <html lang={lng} className="h-[100svh] overflow-hidden">
+    <html lang="en" className="h-[100svh] overflow-hidden">
       <body className="h-full flex flex-col sansation overflow-hidden">
-        <DayProvider>
-          <ThemeProvider>
-            <OverlayProvider>
-              <MainLayout params={params}>{children}</MainLayout>
-            </OverlayProvider>
-          </ThemeProvider>
-        </DayProvider>
+        {children}
       </body>
     </html>
   );
