@@ -24,7 +24,7 @@ export default function Footer({
   const currentPosition = items.indexOf(currentPage) - 1;
 
   return (
-    <footer className="relative w-full flex justify-center items-center p-8 gap-8 bg-[#FFFFFF] dark:bg-[#000000]">
+    <footer className="relative w-full flex justify-center items-center p-8 gap-8 bg-[#FFFFFF] dark:bg-[#1F1F1F]">
       <motion.div
         initial={{
           x: `${currentPosition * (48 + 24)}px`,
