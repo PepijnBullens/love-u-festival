@@ -20,12 +20,13 @@ export default function Footer({
     fetchLanguage();
   }, [params]);
 
-  const items = ["installation", "information", "map", "schedule"];
+  const items = ["information", "map", "schedule"];
+  const untouched = ["installation"];
   const currentPosition = items.indexOf(currentPage) - 1;
 
   return (
     <footer className="relative w-full flex justify-center items-center p-8 gap-8 bg-[#FFFFFF] dark:bg-[#191919]">
-      {currentPage !== "installation" && (
+      {!untouched.includes(currentPage) && (
         <motion.div
           initial={{
             x: `${currentPosition * (48 + 24)}px`,

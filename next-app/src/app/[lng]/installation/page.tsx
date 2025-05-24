@@ -56,7 +56,7 @@ export default function InstallPage() {
       {showInstallButton && (
         <button
           onClick={handleInstallClick}
-          className="bg-red max-w-[350px] active:scale-[98%] transition-transform text-white rounded-lg w-full flex justify-center p-4"
+          className="bg-[#000000] dark:bg-[#FFFFFF] max-w-[350px] active:scale-[98%] transition-transform text-[#FFFFFF] dark:text-[#000000] rounded-lg w-full flex justify-center p-4"
         >
           Add to Home Screen
         </button>
@@ -73,7 +73,6 @@ export default function InstallPage() {
             {" "}
             +{" "}
           </span>
-          .
         </p>
       )}
     </div>
