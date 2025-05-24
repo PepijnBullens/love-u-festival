@@ -1,3 +1,5 @@
+"use client";
+
 import Map from "@/component/pages/map";
 import { Suspense } from "react";
 

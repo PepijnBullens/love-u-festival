@@ -5,6 +5,7 @@ import { languages } from "../i18n/settings";
 import "./globals.css";
 import MainLayout from "@/layout/main-layout";
 import { DayProvider } from "@/context/day-context";
+import LangSetter from "@/components/lang-setter";
 
 export const metadata: Metadata = {
   title: "❤️ U Festival",
@@ -39,16 +40,16 @@ export default async function RootLayout({
   const { lng } = await params;
 
   return (
-    <html lang={lng} className="h-[100svh] overflow-hidden">
-      <body className="h-full flex flex-col sansation overflow-hidden">
-        <DayProvider>
-          <ThemeProvider>
-            <OverlayProvider>
-              <MainLayout params={params}>{children}</MainLayout>
-            </OverlayProvider>
-          </ThemeProvider>
-        </DayProvider>
-      </body>
-    </html>
+    <>
+      <LangSetter lng={lng} />
+
+      <DayProvider>
+        <ThemeProvider>
+          <OverlayProvider>
+            <MainLayout params={params}>{children}</MainLayout>
+          </OverlayProvider>
+        </ThemeProvider>
+      </DayProvider>
+    </>
   );
 }

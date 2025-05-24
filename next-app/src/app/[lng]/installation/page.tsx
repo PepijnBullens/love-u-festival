@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { translation } from "@/app/i18n";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -10,7 +11,24 @@ type BeforeInstallPromptEvent = Event & {
   }>;
 };
 
-export default function InstallPage() {
+export default function InstallPage({
+  params,
+}: {
+  params: Promise<{ lng: string }>;
+}) {
+  const [t, setT] = useState<(key: string) => string>(
+    () => (key: string) => key
+  );
+
+  useEffect(() => {
+    async function fetchLngAndTranslation() {
+      const { lng } = await params;
+      const { t } = await translation(lng, "installation");
+      setT(() => t);
+    }
+    fetchLngAndTranslation();
+  }, [params]);
+
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
   const [deferredPrompt, setDeferredPrompt] =
@@ -18,23 +36,27 @@ export default function InstallPage() {
   const [showInstallButton, setShowInstallButton] = useState(false);
 
   useEffect(() => {
-    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent));
+    if (typeof navigator !== "undefined") {
+      setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent));
+    }
 
-    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
+    if (typeof window !== "undefined") {
+      setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
 
-    const handler = (e: Event) => {
-      const event = e as BeforeInstallPromptEvent;
+      const handler = (e: Event) => {
+        const event = e as BeforeInstallPromptEvent;
 
-      event.preventDefault();
-      setDeferredPrompt(event);
-      setShowInstallButton(true);
-    };
+        event.preventDefault();
+        setDeferredPrompt(event);
+        setShowInstallButton(true);
+      };
 
-    window.addEventListener("beforeinstallprompt", handler);
+      window.addEventListener("beforeinstallprompt", handler);
 
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-    };
+      return () => {
+        window.removeEventListener("beforeinstallprompt", handler);
+      };
+    }
   }, []);
 
   const handleInstallClick = async () => {
@@ -52,23 +74,23 @@ export default function InstallPage() {
 
   return (
     <div className="p-8  flex grow items-center justify-center flex-col">
-      <h1 className="text-center text-5xl mb-4">Install App</h1>
+      <h1 className="text-center sansation-bold text-5xl mb-4">{t("title")}</h1>
       {showInstallButton && (
         <button
           onClick={handleInstallClick}
           className="bg-[#000000] dark:bg-[#FFFFFF] max-w-[350px] active:scale-[98%] transition-transform text-[#FFFFFF] dark:text-[#000000] rounded-lg w-full flex justify-center p-4"
         >
-          Add to Home Screen
+          {t("add")}
         </button>
       )}
       {isIOS && (
-        <p>
-          To install this app on your iOS device, tap the share button
+        <p className="text-center">
+          {t("first")}
           <span role="img" aria-label="share icon">
             {" "}
             ⎋{" "}
           </span>
-          and then &quot;Add to Home Screen&quot;
+          {t("second")}
           <span role="img" aria-label="plus icon">
             {" "}
             +{" "}

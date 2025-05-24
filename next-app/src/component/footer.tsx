@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Icon from "@/component/icon";
 import { motion } from "framer-motion";
