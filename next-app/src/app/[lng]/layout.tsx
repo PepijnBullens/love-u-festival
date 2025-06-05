@@ -5,7 +5,7 @@ import { languages } from "../i18n/settings";
 import "./globals.css";
 import MainLayout from "@/layout/main-layout";
 import { DayProvider } from "@/context/day-context";
-import LangSetter from "@/components/lang-setter";
+import LangSetter from "@/component/lang-setter";
 
 export const metadata: Metadata = {
   title: "❤️ U Festival",
